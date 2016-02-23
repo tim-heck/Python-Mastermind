@@ -15,8 +15,15 @@ while count < 4:
 
 print rand_number
 
-print "Welcome to the Cows and Bulls Game!"
-user_num = raw_input("Enter a four digit number: ")
+####################################################
+
+
+def error_check(n):
+    if len(n) < 4 or len(n) > 4:
+        print "The number entered is the a four digit number"
+        return False
+    return True
+
 
 def num_cows(num, rand_int):
     cows = 0
@@ -28,5 +35,20 @@ def num_cows(num, rand_int):
             cows += 1
         count += 1
     return cows
+
+def num_bulls(num, rand_int):
+    bulls = 0
+    for i in num:
+        if str(i) == str(rand_int[count + 1]):
+            return bulls
+
+####################################################
+
+
+print "Welcome to the Cows and Bulls Game!"
+user_num = raw_input("Enter a four digit number: ")
+
+while error_check(user_num) == False:
+    user_num = raw_input("Enter a four digit number: ")
 
 print num_cows(user_num, rand_number)
