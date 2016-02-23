@@ -25,22 +25,39 @@ def error_check(n):
     return True
 
 
-def num_cows(num, rand_int):
-    cows = 0
-    count = 0
+def check_guess(num, rand_int):
+    cows_bulls = ["", "", "", ""]
+    count1 = 0
     for i in num:
-        if count == 4:
-            return cows
-        elif str(i) == str(rand_int[count]):
-            cows += 1
-        count += 1
-    return cows
+        if str(i) == str(rand_int[count1]):
+            cows_bulls[count1] = "cow"
+        count1 += 1
 
-def num_bulls(num, rand_int):
-    bulls = 0
+    count2 = 0
+    if cows_bulls[count2] == "cow":
+        count2 += 1
+    if cows_bulls[count2] == "bull":
+        count2 += 1
     for i in num:
-        if str(i) == str(rand_int[count + 1]):
-            return bulls
+        if str(i) == str(rand_int[count2 + 1]):
+            if count + 1 > 4:
+                return cows_bulls
+            cows_bulls[count + 1] = "bull"
+            if count + 2 > 4:
+                return cows_bulls
+        if str(i) == str(rand_int[count2 + 2]):
+            if count + 2 > 4:
+                return cows_bulls
+            cows_bulls[count + 2] = "bull"
+            if count + 3 > 4:
+                return cows_bulls
+        if str(i) == str(rand_int[count2 + 3]):
+            if count + 3 > 4:
+                return cows_bulls
+            cows_bulls[count + 3] = "bull"
+        count2 += 1
+    return cows_bulls
+
 
 ####################################################
 
@@ -51,4 +68,4 @@ user_num = raw_input("Enter a four digit number: ")
 while error_check(user_num) == False:
     user_num = raw_input("Enter a four digit number: ")
 
-print num_cows(user_num, rand_number)
+print check_guess(user_num, rand_number)
