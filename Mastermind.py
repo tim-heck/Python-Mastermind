@@ -18,59 +18,60 @@ print rand_number
 ####################################################
 
 
+# Method to check if the user entered number is
+# a four digit number
 def error_check(n):
     if len(n) < 4 or len(n) > 4:
-        print "The number entered is the a four digit number"
+        print "You did not enter a four digit number"
         return False
+    #Check if not number?
     return True
 
 
-def num_cows(num, rand_int):
-    cows = ["", "", "", ""]
+def check_guess(num, rand_int):
+    new_num = ""
+    cows = 0
     count1 = 0
     for i in num:
         if str(i) == str(rand_int[count1]):
-            cows[count1] = "cow"
-        count1 += 1
-    return cows
-
-
-def num_bulls(num, rand_int):
-    bulls = ["", "", "", ""]
-    count2 = 0
-    for i in num:
-        if count2 == 0:
-            if str(i) == str(rand_int[count2 + 1])\
-                    or str(i) == str(rand_int[count2 + 2])\
-                    or str(i) == str(rand_int[count2 + 3]):
-                bulls[count2] = "bull"
-        elif count2 == 1:
-            if str(i) == str(rand_int[count2 - 1])\
-                    or str(i) == str(rand_int[count2 + 1])\
-                    or str(i) == str(rand_int[count2 + 2]):
-                bulls[count2] = "bull"
-        elif count2 == 2:
-            if str(i) == str(rand_int[count2 - 2])\
-                    or str(i) == str(rand_int[count2 - 1])\
-                    or str(i) == str(rand_int[count2 + 1]):
-                bulls[count2] = "bull"
+            new_num += ""
+            cows += 1
         else:
-            if str(i) == str(rand_int[count2 - 3])\
-                    or str(i) == str(rand_int[count2 - 2])\
-                    or str(i) == str(rand_int[count2 - 1]):
-                bulls[count2] = "bull"
-        count2 += 1
-    return bulls
+            new_num = new_num + rand_int[count1]
+        count1 += 1
+    print cows
+    print new_num
+
+    bulls = 0
+    for i in new_num:
+        for j in num:
+            if str(i) == str(j):
+                bulls += 1
+    print bulls
+
+    return str(cows) + " cow(s) " + str(bulls) + " bull(s)"
+
+
+# def game_won(num_cows):
+#     if num_cows == 4:
+#         return True
 
 
 ####################################################
 
 
 print "Welcome to the Cows and Bulls Game!"
+print ""
+print "Guess the random four digit number by receiving a cow\n" \
+      "for every digit that you guess correctly in the correct\n" \
+      "place and a bull if it is not a cow you guess correctly,\n" \
+      "but in the wrong place. Good luck!"
+print ""
+
+# while (game_won)
 user_num = raw_input("Enter a four digit number: ")
 
-while error_check(user_num) == False:
+while error_check(user_num) == 0:
     user_num = raw_input("Enter a four digit number: ")
 
-print num_cows(user_num, rand_number)
-print num_bulls(user_num, rand_number)
+print check_guess(user_num, rand_number)
