@@ -55,10 +55,13 @@ def compare_guess(num, rand_int):
     bulls = 0
     # Checks each digit of the new number with each digit
     # in the randomly generated number to count bulls
-    for i in new_num:
-        for j in num:
+    for i in num:
+        for j in new_num:
             if str(i) == str(j):
                 bulls += 1
+                # Eliminates double counting for bulls
+                if bulls == (bulls - 1) + 1:
+                    break
 
     return str(cows) + " cow(s), " + str(bulls) + " bull(s)"
 
