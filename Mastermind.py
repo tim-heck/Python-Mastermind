@@ -37,38 +37,30 @@ def error_check(n):
 # generated number. Counts the number of cows and the number
 # of bulls
 def compare_guess(num, rand_int):
-    new_num = ""  # The new number with removed cows
-    # new_num = []
     cows = 0
-    count1 = 0
+    bulls = 0
     # Checks each digit from user enter number with the
     # randomly generated number for correct position
     # counts the cows, if a cow is found, that digit from
-    # the user entered number is removed
-    for i in num:
-        if str(i) == str(rand_int[count1]):
-            new_num += "E"
-            # new_num.append("E")
+    # the user entered number is replaced with an 'E'
+    for i in range(0, 4):
+        if str(rand_int[i]) == str(num[i]):
+            rand_int = rand_int[:i] + "C" + rand_int[i+1:]
+            num = num[:i] + "c" + num[i+1:]
             cows += 1
-        else:
-            new_num += rand_int[count1]
-            # new_num.append(num[count1])
-        count1 += 1
 
-    print new_num
-
-    bulls = 0
     # Checks each digit of the new number with each digit
     # in the randomly generated number to count bulls
-    for i in range(0, len(new_num)):
+    for i in range(0, 4):
         for j in range(0, 4):
-            if str(new_num[i]) == str(num[j]):
+            if str(rand_int[i]) == str(num[j]):
                 bulls += 1
-                new_num = new_num[:i] + "E" + new_num[i+1:]
-                # Eliminates double counting for bulls for multiple numbers
-                # if bulls == (bulls - 1) + 1:
+                rand_int = rand_int[:i] + "B" + rand_int[i+1:]
+                num = num[:j] + "b" + num[j+1:]  # Prevents a single digit to be double counted
                 break
-    print new_num
+
+    # print rand_int
+    # print num
 
     return str(cows) + " cow(s), " + str(bulls) + " bull(s)"
 
