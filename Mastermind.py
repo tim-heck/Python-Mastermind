@@ -24,10 +24,16 @@ while count < 4:
 # Method to check if the user entered number is
 # a four digit number
 def error_check(n):
-    if len(n) < 4 or len(n) > 4:
-        print "You did not enter a four digit number"
-        return False
-    return True
+    result = True
+    try:
+        if len(n) < 4 or len(n) > 4:
+            print "You did not enter a four digit number"
+            result = False
+        int(n)
+    except ValueError:
+        print "You must enter numbers for the digits"
+        result = False
+    return result
 
 
 # Method for comparing the user guess with the randomly
@@ -64,14 +70,15 @@ def compare_guess(num, rand_int):
 
 ####################################################
 
-print ""
-print "Welcome to the Cows and Bulls Game!"
-print ""
-print "Guess the randomly generated four digit number by receiving a\n" \
-      "cow for every digit that you guess correctly in the correct\n" \
-      "place, and a bull if it is not a cow you and if you guess\n" \
-      "correctly, but in the wrong place. Good luck!"
-print ""
+print """
+Welcome to the Cows and Bulls Game!
+
+Guess the randomly generated four digit number by receiving a
+cow for every digit that you guess correctly in the correct
+place, and a bull if it is not a cow you and if you guess
+correctly, but in the wrong place. Good luck!
+"""
+
 
 user_num = 1
 num_guesses = 0
